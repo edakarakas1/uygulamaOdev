@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sinavdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Hakkimizda_Tablosu">
+    <Key>
+      <PropertyRef Name="PersonelId" />
+    </Key>
+    <Property Name="PersonelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="isim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="görev" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="resim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="İletisim_Tablosu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Kategori_Tablosu">
+    <Key>
+      <PropertyRef Name="KategoriId" />
+    </Key>
+    <Property Name="KategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Urunler_Tablosu" Relationship="Self.FK_Urunler_Tablosu_Kategori_Tablosu" FromRole="Kategori_Tablosu" ToRole="Urunler_Tablosu" />
+  </EntityType>
+  <EntityType Name="Ozellik_Tablosu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="butonrenk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tarihce_Tablosu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="baslik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="resim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Urunler_Tablosu">
+    <Key>
+      <PropertyRef Name="UrunId" />
+    </Key>
+    <Property Name="UrunId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UrunAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KategoriId" Type="Int32" />
+    <Property Name="Fiyat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="UrunAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UrunResim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Kategori_Tablosu" Relationship="Self.FK_Urunler_Tablosu_Kategori_Tablosu" FromRole="Urunler_Tablosu" ToRole="Kategori_Tablosu" />
+  </EntityType>
+  <Association Name="FK_Urunler_Tablosu_Kategori_Tablosu">
+    <End Role="Kategori_Tablosu" Type="Self.Kategori_Tablosu" Multiplicity="0..1" />
+    <End Role="Urunler_Tablosu" Type="Self.Urunler_Tablosu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori_Tablosu">
+        <PropertyRef Name="KategoriId" />
+      </Principal>
+      <Dependent Role="Urunler_Tablosu">
+        <PropertyRef Name="KategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="sinavdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Hakkimizda_Tablosu" EntityType="Self.Hakkimizda_Tablosu" />
+    <EntitySet Name="İletisim_Tablosu" EntityType="Self.İletisim_Tablosu" />
+    <EntitySet Name="Kategori_Tablosu" EntityType="Self.Kategori_Tablosu" />
+    <EntitySet Name="Ozellik_Tablosu" EntityType="Self.Ozellik_Tablosu" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Tarihce_Tablosu" EntityType="Self.Tarihce_Tablosu" />
+    <EntitySet Name="Urunler_Tablosu" EntityType="Self.Urunler_Tablosu" />
+    <AssociationSet Name="FK_Urunler_Tablosu_Kategori_Tablosu" Association="Self.FK_Urunler_Tablosu_Kategori_Tablosu">
+      <End Role="Kategori_Tablosu" EntitySet="Kategori_Tablosu" />
+      <End Role="Urunler_Tablosu" EntitySet="Urunler_Tablosu" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

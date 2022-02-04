@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sinavdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Hakkimizda_Tablosu">
+    <Key>
+      <PropertyRef Name="PersonelId" />
+    </Key>
+    <Property Name="PersonelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isim" Type="nvarchar" MaxLength="50" />
+    <Property Name="görev" Type="nvarchar" MaxLength="50" />
+    <Property Name="aciklama" Type="nvarchar(max)" />
+    <Property Name="resim" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="İletisim_Tablosu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ad" Type="nvarchar" MaxLength="50" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="mesaj" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Kategori_Tablosu">
+    <Key>
+      <PropertyRef Name="KategoriId" />
+    </Key>
+    <Property Name="KategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KategoriAd" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Ozellik_Tablosu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="icon" Type="nvarchar" MaxLength="50" />
+    <Property Name="aciklama" Type="nvarchar(max)" />
+    <Property Name="butonrenk" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tarihce_Tablosu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="baslik" Type="nvarchar" MaxLength="50" />
+    <Property Name="aciklama" Type="nvarchar(max)" />
+    <Property Name="resim" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Urunler_Tablosu">
+    <Key>
+      <PropertyRef Name="UrunId" />
+    </Key>
+    <Property Name="UrunId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UrunAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="KategoriId" Type="int" />
+    <Property Name="Fiyat" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="UrunAciklama" Type="nvarchar(max)" />
+    <Property Name="UrunResim" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Urunler_Tablosu_Kategori_Tablosu">
+    <End Role="Kategori_Tablosu" Type="Self.Kategori_Tablosu" Multiplicity="0..1" />
+    <End Role="Urunler_Tablosu" Type="Self.Urunler_Tablosu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori_Tablosu">
+        <PropertyRef Name="KategoriId" />
+      </Principal>
+      <Dependent Role="Urunler_Tablosu">
+        <PropertyRef Name="KategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="sinavdbModelStoreContainer">
+    <EntitySet Name="Hakkimizda_Tablosu" EntityType="Self.Hakkimizda_Tablosu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="İletisim_Tablosu" EntityType="Self.İletisim_Tablosu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kategori_Tablosu" EntityType="Self.Kategori_Tablosu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ozellik_Tablosu" EntityType="Self.Ozellik_Tablosu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tarihce_Tablosu" EntityType="Self.Tarihce_Tablosu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Urunler_Tablosu" EntityType="Self.Urunler_Tablosu" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Urunler_Tablosu_Kategori_Tablosu" Association="Self.FK_Urunler_Tablosu_Kategori_Tablosu">
+      <End Role="Kategori_Tablosu" EntitySet="Kategori_Tablosu" />
+      <End Role="Urunler_Tablosu" EntitySet="Urunler_Tablosu" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,96 @@
+﻿@model Grup1.Models.Urunler
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutpage.cshtml";
+}
+
+<header class="row tm-welcome-section">
+    <h2 class="col-12 text-center tm-section-title">Gizli Bahçeye Hoşgeldiniz</h2>
+    <p class="col-12 text-center">Unutulmaz tatları lokasyonlarda sunun Gizli Bahçe,dünyaca ünlü şeflerinin ellerinden gurme lezzetleri misafirleri ile paylaşıyor.</p>
+</header>
+
+
+<div class="tm-paging-links">
+    <nav>
+        <ul>
+            <li class="tm-paging-item">
+                <a href="#" class="tm-paging-link active">Tümü</a>
+            </li>
+            @foreach (var item in Model.kategoriList)
+            {
+                <li class="tm-paging-item"><a href="#" class="tm-paging-link">@item.KategoriAd</a></li>
+            }
+        </ul>
+    </nav>
+</div>
+<div class="row tm-gallery">
+    <div id="tm-gallery-page-tümü" class="tm-gallery-page">
+        @foreach (var item in Model.urunlerList)
+        {
+            <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                <figure>
+                    <img src="~/Content/img/gallery/@item.UrunResim" alt="Image" class="img-fluid tm-gallery-img" />
+                    <figcaption>
+                        <h4 class="tm-gallery-title"><a href="/Urun/Detay/@item.UrunId" class="tm-gallery-title">@item.UrunAd</a></h4>
+                        <p class="tm-gallery-description">@item.UrunAciklama</p>
+                        <p class="tm-gallery-price">@String.Format("{0:c2}", @item.Fiyat)</p>
+                    </figcaption>
+                </figure>
+            </article>
+        }
+    </div>
+    <div id="tm-gallery-page-pizza" class="tm-gallery-page hidden">
+        @foreach (var item in Model.urunlerList)
+        {
+            if (item.KategoriId == 2)
+            {
+                <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                    <figure>
+                        <img src="~/Content/img/gallery/@item.UrunResim" alt="Image" class="img-fluid tm-gallery-img" />
+                        <figcaption>
+                            <h4 class="tm-gallery-title"><a href="/Urun/Detay/@item.UrunId" class="tm-gallery-title">@item.UrunAd</a></h4>
+                            <p class="tm-gallery-description">@item.UrunAciklama</p>
+                            <p class="tm-gallery-price">@String.Format("{0:c2}", @item.Fiyat)</p>
+                        </figcaption>
+                    </figure>
+                </article>
+            }
+        }
+    </div>
+    <div id="tm-gallery-page-salata" class="tm-gallery-page hidden">
+        @foreach (var item in Model.urunlerList)
+        {
+            if (item.KategoriId == 3)
+            {
+                <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                    <figure>
+                        <img src="~/Content/img/gallery/@item.UrunResim" alt="Image" class="img-fluid tm-gallery-img" />
+                        <figcaption>
+                            <h4 class="tm-gallery-title"><a href="/Urun/Detay/@item.UrunId" class="tm-gallery-title">@item.UrunAd</a></h4>
+                            <p class="tm-gallery-description">@item.UrunAciklama</p>
+                            <p class="tm-gallery-price">@String.Format("{0:c2}", @item.Fiyat)</p>
+                        </figcaption>
+                    </figure>
+                </article>
+            }
+        }
+    </div>
+    <div id="tm-gallery-page-noodle" class="tm-gallery-page hidden">
+        @foreach (var item in Model.urunlerList)
+        {
+            if (item.KategoriId == 4)
+            {
+                <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                    <figure>
+                        <img src="~/Content/img/gallery/@item.UrunResim" alt="Image" class="img-fluid tm-gallery-img" />
+                        <figcaption>
+                            <h4 class="tm-gallery-title"><a href="/Urun/Detay/@item.UrunId" class="tm-gallery-title">@item.UrunAd</a></h4>
+                            <p class="tm-gallery-description">@item.UrunAciklama</p>
+                            <p class="tm-gallery-price">@String.Format("{0:c2}", @item.Fiyat)</p>
+                        </figcaption>
+                    </figure>
+                </article>
+            }
+        }
+    </div>
+</div>

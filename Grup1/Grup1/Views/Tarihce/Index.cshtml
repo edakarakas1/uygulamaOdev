@@ -1,0 +1,56 @@
+﻿@model Grup1.Models.Tarihce
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutpage.cshtml";
+}
+
+
+<div class="tm-container-inner tm-history">
+    <div class="row">
+        <div class="col-12">
+            <div class="tm-history-inner">
+                @foreach (var item in Model.tarihceList)
+                {
+                    <img src="~/Content/img/@item.resim" alt="Image" class="img-fluid tm-history-img" />
+                    <div class="tm-history-text">
+                        <h4 class="tm-history-title">@item.baslik</h4>
+                        <p class="tm-mb-p">@item.aciklama</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tm-container-inner tm-featured-image">
+    <div class="row">
+        <div class="col-12">
+            <div class="placeholder-2">
+                <div class="parallax-window-2" data-parallax="scroll" data-image-src="/Content/img/about-05.jpg"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="tm-container-inner tm-features">
+    <div class="row">
+        @foreach (var item in Model.ozellikList)
+        {
+            <div class="col-lg-4">
+                <div class="tm-feature">
+                    <i class="fas fa-4x @item.icon tm-feature-icon"></i>
+                    <p class="tm-feature-description">@item.aciklama</p>
+                    <a href="index.html" class="tm-btn-@item.butonrenk  ">Daha Fazlası</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<script src="/Content/js/jquery.min.js"></script>
+<script src="/Content/js/parallax.min.js"></script>
